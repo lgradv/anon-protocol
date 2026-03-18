@@ -209,12 +209,22 @@ Output:
 
 ### Integration with Claude Code
 
-When using Claude Code as your AI assistant, the workflow becomes seamless:
+When using Claude Code as your AI assistant, the workflow becomes seamless. Just add `-anon` after the file path in your message to Claude:
 
-1. Send the document path with `-anon` flag to Claude
-2. Claude runs the anonymization pipeline automatically
-3. Claude processes the anonymized text
-4. Claude runs the revert step and delivers the final output
+```
+/home/user/documents/contract.pdf -anon
+```
+
+or
+
+```
+/home/user/documents/contract.pdf -anon please review the termination clause
+```
+
+Claude will:
+1. Run the anonymization pipeline automatically
+2. Process the anonymized text
+3. Run the revert step and deliver the final output with real data restored
 
 No manual steps. No copy-paste. The protocol is invisible.
 
