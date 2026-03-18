@@ -105,14 +105,14 @@ The default configuration targets Brazil. After running `setup_local.py`, entity
 | `CPF` | regex | 000.000.000-00 |
 | `CNPJ` | regex | 00.000.000/0001-00 |
 | `CEP` | regex | 00000-000 |
-| `TELEFONE` | regex | (41) 99999-9999 |
+| `TELEFONE` | regex | (xx) 99999-9999 |
 | `DATA` | regex | 01/01/2025 |
 | `EMAIL` | regex | name@domain.com |
 | `OAB` | regex | OAB/XX 12345 |
 | `PROCESSO` | regex | 0000000-00.0000.0.00.0000 |
-| `PESSOA` | NLP (spaCy) | João da Silva |
-| `ORGANIZACAO` | NLP (spaCy) | Escritório Ramilo & Associados |
-| `LOCAL` | NLP (spaCy) | Rua das Flores, Pato Branco |
+| `PESSOA` | NLP (spaCy) | John Smtih |
+| `ORGANIZACAO` | NLP (spaCy) | Law firm |
+| `LOCAL` | NLP (spaCy) | Stret name, new york |
 
 **Other countries (via setup_local):**
 
