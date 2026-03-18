@@ -96,7 +96,11 @@ This is not just a privacy tool. It is a philosophical position: **AI should rea
 
 ## Detected Entity Types
 
-| Type | Method | Examples |
+The default configuration targets Brazil. After running `setup_local.py`, entity types are replaced by the equivalents for your country — CPF becomes SSN (United States), NIF (Portugal), DNI (Spain), and so on. The pattern names in the map file will reflect the local terminology.
+
+**Default (Brazil):**
+
+| Type | Method | Example |
 |---|---|---|
 | `CPF` | regex | 000.000.000-00 |
 | `CNPJ` | regex | 00.000.000/0001-00 |
@@ -106,11 +110,24 @@ This is not just a privacy tool. It is a philosophical position: **AI should rea
 | `EMAIL` | regex | name@domain.com |
 | `OAB` | regex | OAB/XX 12345 |
 | `PROCESSO` | regex | 0000000-00.0000.0.00.0000 |
-| `PESSOA` | NLP (John Smith)
-| `ORGANIZACAO` | NLP (spaCy) | Law Firm |
-| `LOCAL` | NLP (spaCy) | Street name, New York |
+| `PESSOA` | NLP (spaCy) | João da Silva |
+| `ORGANIZACAO` | NLP (spaCy) | Escritório Ramilo & Associados |
+| `LOCAL` | NLP (spaCy) | Rua das Flores, Pato Branco |
 
-Legal acronyms and abbreviations (LGPD, CLT, OAB, STJ, state codes, etc.) are preserved and never anonymized.
+**Other countries (via setup_local):**
+
+| Country | Personal ID | Tax ID | Postal Code |
+|---|---|---|---|
+| United States | SSN | EIN | ZIP |
+| Portugal | NIF | NIPC | CP |
+| Spain | DNI / NIE | CIF | CP |
+| France | NIR | SIREN / SIRET | CP |
+| Germany | Personalausweis | Steuernummer | PLZ |
+| Argentina | DNI | CUIT | CP |
+
+Any country is supported — `setup_local.py` asks Claude to research the correct patterns for wherever you are.
+
+Legal acronyms, court abbreviations, and administrative region codes for your country are automatically added to the preserve list and never anonymized.
 
 ---
 
@@ -259,7 +276,7 @@ If you are a lawyer, legal tech professional, or privacy researcher — open an 
 
 **Lucas Gabriel Ramilo**
 Lawyer · Legal Tech · LGR Consultoria LTDA
-[lgradv@proton.me](mailto:lucasramiloadv@gmail.com)
+[lgradv@proton.me]
 
 ---
 
