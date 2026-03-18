@@ -1,0 +1,46 @@
+--- EXEMPLO DE TEXTO ANONIMIZADO ---
+
+CONTRATO DE PRESTAÇÃO DE SERVIÇOS
+
+Pelo presente instrumento, de um lado [[ORGANIZACAO_1]], pessoa jurídica de direito
+privado, inscrita no CNPJ nº [[CNPJ_1]], com sede na [[LOCAL_1]], nº 450,
+[[LOCAL_2]] – SP, doravante denominada CONTRATANTE, e de outro lado [[PESSOA_1]],
+advogado inscrito na [[ORGANIZACAO_2]] sob nº [[OAB_1]], CPF nº [[CPF_1]],
+residente na [[LOCAL_3]], doravante denominado CONTRATADO, têm entre si ajustado
+o presente contrato, que se regerá pelas cláusulas seguintes.
+
+CLÁUSULA I – DO OBJETO
+O presente contrato tem por objeto a prestação de serviços advocatícios nas áreas
+cível e trabalhista, conforme demandas apresentadas pela CONTRATANTE.
+
+CLÁUSULA II – DO PRAZO
+O contrato vigorará pelo período de 12 (doze) meses a contar de [[DATA_1]],
+podendo ser renovado por igual período mediante aditivo escrito.
+
+CLÁUSULA III – DOS HONORÁRIOS
+A CONTRATANTE pagará ao CONTRATADO honorários mensais no valor de R$ 5.000,00
+(cinco mil reais), a serem depositados na conta indicada pelo CONTRATADO até o
+5º dia útil de cada mês.
+
+Para contato: [[EMAIL_1]] | [[TELEFONE_1]]
+
+[[LOCAL_2]], [[DATA_2]]
+
+
+--- MAPA CORRESPONDENTE (map_contrato_20260318.json) ---
+
+{
+  "[[ORGANIZACAO_1]]": "Empresa Exemplo Ltda",
+  "[[CNPJ_1]]": "12.345.678/0001-90",
+  "[[LOCAL_1]]": "Avenida Paulista",
+  "[[LOCAL_2]]": "São Paulo",
+  "[[PESSOA_1]]": "Dr. Carlos Mendes",
+  "[[ORGANIZACAO_2]]": "OAB/SP",
+  "[[OAB_1]]": "SP 123.456",
+  "[[CPF_1]]": "123.456.789-00",
+  "[[LOCAL_3]]": "Rua Augusta, 1200, Jardins",
+  "[[DATA_1]]": "01/04/2026",
+  "[[DATA_2]]": "18/03/2026",
+  "[[EMAIL_1]]": "carlos.mendes@advocacia.com.br",
+  "[[TELEFONE_1]]": "(11) 98765-4321"
+}

@@ -1,0 +1,17 @@
+__pycache__/
+*.py[cod]
+*.pyo
+.env
+*.egg-info/
+dist/
+build/
+.DS_Store
+
+# Never commit real documents or maps
+map_*.json
+anon_*.txt
+*.docx
+*.pdf
+*.png
+*.jpg
+*.jpeg

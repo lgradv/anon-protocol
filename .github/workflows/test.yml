@@ -1,0 +1,34 @@
+name: Test
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install Tesseract
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y tesseract-ocr tesseract-ocr-por
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+          pip install https://github.com/explosion/spacy-models/releases/download/pt_core_news_lg-3.8.0/pt_core_news_lg-3.8.0-py3-none-any.whl
+
+      - name: Run smoke test
+        run: |
+          echo "CNPJ 12.345.678/0001-90, CPF 123.456.789-00, João da Silva" > /tmp/test.txt
+          python3 anon_protocol.py /tmp/test.txt | grep -q "\[\[" && echo "PASS: placeholders found" || (echo "FAIL: no placeholders" && exit 1)
