@@ -114,12 +114,12 @@ Legal acronyms and abbreviations (LGPD, CLT, OAB, STJ, state codes, etc.) are pr
 
 ---
 
-## Internationalization
+## Internationalization (setup_local)
 
 Anon Protocol works for any country. During setup, it asks Claude to research the local context — ID document formats, tax numbers, legal acronyms, court names, administrative region codes — and configures itself automatically.
 
 ```bash
-python3 setup_locale.py
+python3 setup_local.py
 ```
 
 ```
@@ -139,7 +139,7 @@ The result is saved as `config.json`. From that point, `anon_protocol.py` uses t
 
 If no `config.json` exists, the tool defaults to Brazilian Portuguese.
 
-To add a new locale manually, run `setup_locale.py` and type your country. Claude does the research.
+To add a new locale manually, run `setup_local.py` and type your country. Claude does the research.
 
 ---
 

@@ -25,9 +25,9 @@ BANNER = """
 ╚═══════════════════════════════════════════════╝
 """
 
-# ── Locale: carrega config.json se existir, senão usa padrão BR ───────────────
+# ── Local: carrega config.json se existir, senão usa padrão BR ────────────────
 
-def load_locale():
+def load_local():
     config_path = Path(__file__).parent / "config.json"
     if config_path.exists():
         config = json.loads(config_path.read_text(encoding="utf-8"))
@@ -66,7 +66,7 @@ def _default_patterns():
     }
 
 
-PRESERVE, PATTERNS, SPACY_MODEL, OCR_LANG = load_locale()
+PRESERVE, PATTERNS, SPACY_MODEL, OCR_LANG = load_local()
 
 
 # ── Extração de texto por tipo de arquivo ────────────────────────────────────
