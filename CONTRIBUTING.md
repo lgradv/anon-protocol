@@ -73,4 +73,14 @@ Be direct. Be technical. Be respectful. That's it.
 
 ---
 
-*Lucas Gabriel Ramilo — lucasramiloadv@gmail.com*
+## Donate
+
+If Anon Protocol was useful to you — a Bitcoin contribution is welcome.
+
+```
+bc1q8f8hs40zymuengt0ceypvmvxqrgc0stjjlnplr
+```
+
+---
+
+*Lucas Gabriel Ramilo — lgradv@proton.me*

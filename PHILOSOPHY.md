@@ -30,11 +30,9 @@ Anon Protocol applies the Veil of Ignorance to the AI layer:
 
 **The AI reasons about the document without knowing who is in it.**
 
-It sees structure. It sees clauses. It sees legal concepts. It does not see João da Silva. It does not see the CNPJ. It does not see the address or the CPF or the name of the minor child in the custody agreement.
+It sees structure. It sees clauses. It sees legal concepts. It does not see the real name. It does not see the address or the data or the name of the minor child in the custody agreement.
 
 The analysis it produces is technically grounded precisely because it cannot be personally biased. It doesn't know whose side to be on. It can only reason about the law.
-
-This is not a limitation. This is a feature.
 
 ---
 

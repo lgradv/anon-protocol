@@ -26,18 +26,18 @@ Anon Protocol is a local pipeline that strips sensitive data from documents *bef
 The AI never sees the real data. It receives placeholders:
 
 ```
-[[PESSOA_1]] assinou o contrato da empresa com CNPJ [[CNPJ_1]],
-situada na [[LOCAL_1]], nº 131, [[LOCAL_2]] – PR.
+[[PERSON_1]] assinou o contrato da empresa com CNPJ [[CNPJ_1]],
+situada na [[DRESS_1]], nº xxx, [[DRESS_2]] – UF.
 ```
 
 A local map file — never leaving your machine — holds the real values:
 
 ```json
 {
-  "[[PESSOA_1]]": "João da Silva",
+  "[[PESSOA_1]]": "John Smith",
   "[[CNPJ_1]]": "12.345.678/0001-90",
-  "[[LOCAL_1]]": "Rua das Flores",
-  "[[LOCAL_2]]": "Pato Branco"
+  "[[DRESS_1]]": "Name of stret",
+  "[[DRESS_2]]": "New York"
 }
 ```
 
@@ -104,13 +104,42 @@ This is not just a privacy tool. It is a philosophical position: **AI should rea
 | `TELEFONE` | regex | (41) 99999-9999 |
 | `DATA` | regex | 01/01/2025 |
 | `EMAIL` | regex | name@domain.com |
-| `OAB` | regex | OAB/PR 12345 |
+| `OAB` | regex | OAB/XX 12345 |
 | `PROCESSO` | regex | 0000000-00.0000.0.00.0000 |
-| `PESSOA` | NLP (spaCy) | João da Silva |
-| `ORGANIZACAO` | NLP (spaCy) | Escritório Ramilo & Associados |
-| `LOCAL` | NLP (spaCy) | Rua das Flores, Pato Branco |
+| `PESSOA` | NLP (John Smith)
+| `ORGANIZACAO` | NLP (spaCy) | Law Firm |
+| `LOCAL` | NLP (spaCy) | Street name, New York |
 
 Legal acronyms and abbreviations (LGPD, CLT, OAB, STJ, state codes, etc.) are preserved and never anonymized.
+
+---
+
+## Internationalization
+
+Anon Protocol works for any country. During setup, it asks Claude to research the local context — ID document formats, tax numbers, legal acronyms, court names, administrative region codes — and configures itself automatically.
+
+```bash
+python3 setup_locale.py
+```
+
+```
+What country are you in? United States
+
+[setup] Asking Claude to research 'United States' patterns...
+[setup] Locale detected:
+  Country:      United States
+  Language:     English
+  spaCy model:  en_core_web_lg
+  OCR language: eng
+  Patterns:     9 entity types
+  Preserve:     47 terms
+```
+
+The result is saved as `config.json`. From that point, `anon_protocol.py` uses the local patterns automatically.
+
+If no `config.json` exists, the tool defaults to Brazilian Portuguese.
+
+To add a new locale manually, run `setup_locale.py` and type your country. Claude does the research.
 
 ---
 
@@ -230,7 +259,18 @@ If you are a lawyer, legal tech professional, or privacy researcher — open an 
 
 **Lucas Gabriel Ramilo**
 Lawyer · Legal Tech · LGR Consultoria LTDA
-[lucasramiloadv@gmail.com](mailto:lucasramiloadv@gmail.com)
+[lgradv@proton.me](mailto:lucasramiloadv@gmail.com)
+
+---
+
+## Donate
+
+If this project saved you time, protected your clients, or inspired something new — a contribution is welcome.
+
+**Bitcoin:**
+```
+bc1q8f8hs40zymuengt0ceypvmvxqrgc0stjjlnplr
+```
 
 ---
 

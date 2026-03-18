@@ -25,36 +25,48 @@ BANNER = """
 ╚═══════════════════════════════════════════════╝
 """
 
-# ── Siglas e termos que NÃO devem ser anonimizados ────────────────────────────
+# ── Locale: carrega config.json se existir, senão usa padrão BR ───────────────
 
-PRESERVE = {
-    # Leis e órgãos brasileiros
-    "LGPD", "CLT", "CF", "STJ", "STF", "TST", "TRT", "TRF",
-    "MPF", "MPT", "ANS", "ANATEL", "ANVISA", "BACEN", "CVM",
-    "CADE", "TCU", "TCE", "OAB", "CFM", "CRM", "CRO", "CREA", "CFC",
-    # Documentos e identificadores
-    "CNPJ", "CPF", "RG", "CEP", "CEF", "BB", "FGTS", "INSS", "PIS",
-    # Tipos societários
-    "LTDA", "S.A", "SA", "ME", "EIRELI", "EPP",
-    # Estados brasileiros
-    "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO",
-    "MA", "MT", "MS", "MG", "PA", "PB", "PR", "PE", "PI",
-    "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO",
-}
+def load_locale():
+    config_path = Path(__file__).parent / "config.json"
+    if config_path.exists():
+        config = json.loads(config_path.read_text(encoding="utf-8"))
+        preserve = set(config.get("preserve", []))
+        patterns = config.get("patterns", {})
+        spacy_model = config.get("spacy_model", "pt_core_news_lg")
+        ocr_lang = config.get("ocr_language", "por")
+        return preserve, patterns, spacy_model, ocr_lang
+    # Fallback: Brazil defaults
+    return _default_preserve(), _default_patterns(), "pt_core_news_lg", "por"
 
 
-# ── Padrões regex para dados estruturados ────────────────────────────────────
+def _default_preserve():
+    return {
+        "LGPD", "CLT", "CF", "STJ", "STF", "TST", "TRT", "TRF",
+        "MPF", "MPT", "ANS", "ANATEL", "ANVISA", "BACEN", "CVM",
+        "CADE", "TCU", "TCE", "OAB", "CFM", "CRM", "CRO", "CREA", "CFC",
+        "CNPJ", "CPF", "RG", "CEP", "CEF", "BB", "FGTS", "INSS", "PIS",
+        "LTDA", "S.A", "SA", "ME", "EIRELI", "EPP",
+        "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO",
+        "MA", "MT", "MS", "MG", "PA", "PB", "PR", "PE", "PI",
+        "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO",
+    }
 
-PATTERNS = {
-    "CPF":      r"\b\d{3}[\.\s]?\d{3}[\.\s]?\d{3}[-\s]?\d{2}\b",
-    "CNPJ":     r"\b\d{2}[\.\s]?\d{3}[\.\s]?\d{3}[/\s]?\d{4}[-\s]?\d{2}\b",
-    "CEP":      r"\b\d{5}-\d{3}\b",
-    "TELEFONE": r"\b(\(?\d{2}\)?\s?)?(\d{4,5}[-\s]?\d{4})\b",
-    "DATA":     r"\b\d{1,2}[\/\-\.]\d{1,2}[\/\-\.]\d{2,4}\b",
-    "EMAIL":    r"\b[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}\b",
-    "OAB":      r"\bOAB[\/\s]?[A-Z]{2}[\/\s]?\d+\b",
-    "PROCESSO": r"\b\d{7}-\d{2}\.\d{4}\.\d\.\d{2}\.\d{4}\b",
-}
+
+def _default_patterns():
+    return {
+        "CPF":      r"\b\d{3}[\.\s]?\d{3}[\.\s]?\d{3}[-\s]?\d{2}\b",
+        "CNPJ":     r"\b\d{2}[\.\s]?\d{3}[\.\s]?\d{3}[/\s]?\d{4}[-\s]?\d{2}\b",
+        "CEP":      r"\b\d{5}-\d{3}\b",
+        "TELEFONE": r"\b(\(?\d{2}\)?\s?)?(\d{4,5}[-\s]?\d{4})\b",
+        "DATA":     r"\b\d{1,2}[\/\-\.]\d{1,2}[\/\-\.]\d{2,4}\b",
+        "EMAIL":    r"\b[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}\b",
+        "OAB":      r"\bOAB[\/\s]?[A-Z]{2}[\/\s]?\d+\b",
+        "PROCESSO": r"\b\d{7}-\d{2}\.\d{4}\.\d\.\d{2}\.\d{4}\b",
+    }
+
+
+PRESERVE, PATTERNS, SPACY_MODEL, OCR_LANG = load_locale()
 
 
 # ── Extração de texto por tipo de arquivo ────────────────────────────────────
@@ -80,7 +92,7 @@ def extract_image(path):
     import pytesseract
     from PIL import Image
     img = Image.open(path)
-    return pytesseract.image_to_string(img, lang="por")
+    return pytesseract.image_to_string(img, lang=OCR_LANG)
 
 
 def extract_scanned_pdf(path):
@@ -132,8 +144,8 @@ def detect_regex(text):
 
 def detect_ner(text):
     import spacy
-    log("Loading NLP model (pt_core_news_lg)...")
-    nlp = spacy.load("pt_core_news_lg")
+    log(f"Loading NLP model ({SPACY_MODEL})...")
+    nlp = spacy.load(SPACY_MODEL)
     doc = nlp(text[:100000])
     found = []
     label_map = {"PER": "PESSOA", "ORG": "ORGANIZACAO", "LOC": "LOCAL"}
