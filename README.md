@@ -276,6 +276,6 @@ bc1q8f8hs40zymuengt0ceypvmvxqrgc0stjjlnplr
 
 ## License
 
-MIT License. See [LICENSE](LICENSE).
+GNU General Public License v3.0. See [LICENSE](LICENSE).
 
-Use it, fork it, improve it. Privacy is a right, not a feature.
+Use it, fork it, improve it — but keep it open. Privacy is a right, not a feature.

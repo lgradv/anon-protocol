@@ -2,7 +2,7 @@
 """
 Anon Protocol — Privacy-first document anonymization for AI-assisted legal work.
 Author: Lucas Gabriel Ramilo <lucasramiloadv@gmail.com>
-License: MIT
+License: GPL v3
 Version: 1.0.0
 
 Philosophy: Inspired by John Rawls' Veil of Ignorance — fair decisions are made
